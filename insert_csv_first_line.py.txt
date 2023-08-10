@@ -1,0 +1,18 @@
+import glob # Import the glob module for pathname pattern matching
+
+header = "\"UserPrincipleName\"\n"  # Define the header text to be added to each file (backslashes are escape characters for the quotation marks)
+path = "/path/to/your/csv/files/*.csv" # Define the path pattern for the CSV files to be modified
+
+# Iterate over each file that matches the path pattern
+for filename in glob.glob(path):
+    # Open the current file in read mode and assign it to original_file
+    with open(filename, 'r') as original_file:
+        data = original_file.readlines() # Read all lines of the file into a list called data
+    
+    # Open the current file in write mode and assign it to modified_file
+    with open(filename, 'w') as modified_file:
+        modified_file.write(header) # Write the new header to the file
+        modified_file.writelines(data) # Write the original lines of the file, including the original first line
+
+# Print a completion message to the console
+print("Header added to all files.") 
